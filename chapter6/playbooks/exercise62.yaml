@@ -1,0 +1,11 @@
+---
+- name: configure web servers
+  hosts: webservers
+  vars_files: ~/git/rhce/chapter6/group_vars/webservers
+  tasks:
+  - name: this is the {{ web_package }} package
+    debug:
+      msg: "Installing {{ web_package }}"
+  - name: this is the {{ web_service }} service
+    debug:
+      msg: "Starting the {{ web_service }}"
