@@ -1,2 +1,1 @@
-# rhce
-ansible learning
+# Ansible
