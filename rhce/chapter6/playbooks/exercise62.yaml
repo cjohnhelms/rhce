@@ -1,7 +1,7 @@
 ---
 - name: configure web servers
   hosts: webservers
-  vars_files: ~/git/rhce/chapter6/group_vars/webservers
+  vars_files: ~/git/ansible/rhce/chapter6/group_vars/webservers
   tasks:
   - name: this is the {{ web_package }} package
     debug:

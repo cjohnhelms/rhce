@@ -1,0 +1,22 @@
+---
+- name: copy facts
+  hosts: all
+  vars:
+    remote_dir: /etc/ansible/facts.d
+    fact_file:
+      packages: ../custom_facts/packages.fact
+      services: ../custom_facts/services.fact
+  tasks:
+  - name: create /etc/ansible
+    file:
+      path: "{{ remote_dir }}"
+      state: directory
+  - name: copy packages
+    copy:
+      src: "{{ fact_file['packages']  }}"
+      dest: "{{ remote_dir }}"
+  - name: copy services
+    copy:
+      src: "{{ fact_file['services'] }}"
+      dest: "{{ remote_dir }}"
+

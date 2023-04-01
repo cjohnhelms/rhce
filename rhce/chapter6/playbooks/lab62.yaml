@@ -1,0 +1,88 @@
+---
+- name: configure file server
+  hosts: file
+  vars_files: ../vars/allvars
+  tasks:
+  - name: install services
+    yum:
+      name: 
+        - "{{ ansible_facts['ansible_local']['packages']['packages']['smb_package'] }}"
+        - "{{ ansible_facts['ansible_local']['packages']['packages']['ftp_package'] }}"
+      state: installed
+  - name: start smb
+    service:
+      name: "{{ ansible_facts['ansible_local']['services']['services']['smb_service'] }}"
+      state: started
+      enabled: yes
+  - name: start vsftp
+    service:
+      name: "{{ ansible_facts['ansible_local']['services']['services']['ftp_service'] }}"
+      state: started
+      enabled: yes
+  - name: allow samba
+    firewalld:
+      service: "{{ ansible_facts['ansible_local']['packages']['packages']['smb_package'] }}"
+      state: enabled
+      immediate: true
+      permanent: true
+  - name: allow vsftpd
+    firewalld:
+      port: 21/tcp
+      state: enabled
+      immediate: true
+      permanent: true
+- name: fix lamp server
+  hosts: lamp
+  tasks:
+  - name: disable smb
+    service:
+      name: "{{ ansible_facts['ansible_local']['services']['services']['smb_service'] }}"
+      state: stopped
+      enabled: no
+  - name: disable vsftp
+    service:
+      name: "{{ ansible_facts['ansible_local']['services']['services']['ftp_service'] }}"
+      state: stopped
+      enabled: no
+  - name: disallow samba
+    firewalld:
+      service: "{{ ansible_facts['ansible_local']['packages']['packages']['smb_package'] }}"
+      state: disabled
+      immediate: true
+      permanent: true
+  - name: disallow vsftpd
+    firewalld:
+      port: 21/tcp
+      state: disabled
+      immediate: true
+- name: configure lamp server
+  vars_files: ../vars/allvars
+  hosts: lamp
+  tasks:
+  - name: install packages
+    yum:
+      name:
+      - "{{ ansible_facts['ansible_local']['packages']['packages']['db_package'] }}"
+      - "{{ ansible_facts['ansible_local']['packages']['packages']['web_package'] }}"
+      state: installed
+  - name: start mariadb
+    service:
+      name: "{{ ansible_facts['ansible_local']['services']['services']['db_service'] }}"
+      state: started
+      enabled: yes
+  - name: start web server
+    service:
+      name: "{{ ansible_facts['ansible_local']['services']['services']['web_service'] }}"
+      state: started
+      enabled: yes
+  - name: configure web server
+    copy:
+      dest: /var/www/html/index.html
+      content: "Welcome to the Ansible Web Server"
+  - name: allow firewall to web server
+    firewalld:
+      service: http
+      state: enabled
+      immediate: true
+      permanent: true
+
