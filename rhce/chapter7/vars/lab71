@@ -1,0 +1,5 @@
+packages:
+- name: httpd
+  state: installed
+- name: mod_ssl
+  state: installed

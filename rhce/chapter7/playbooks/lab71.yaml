@@ -1,0 +1,48 @@
+---
+- name: install packages
+  hosts: ansible2
+  vars_files: ../vars/lab71
+
+  tasks:
+
+  - name: install packages
+    yum:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+    loop: "{{ packages }}"
+    when: ansible_facts['distribution'] == "RedHat" or ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_version'] >= 8.0
+    register: result
+
+  - name: debug
+    debug:
+      var: result
+
+  - name: fail message
+    debug:
+      msg: Host {{ ansible_facts['hostname'] does not meet minimal requirements
+    when: result.results[0].rc != 0 or result.results[1].rc != 0
+
+- name: configure webserver
+  hosts: ansible2
+
+  tasks:
+
+  - name: copy file
+    copy:
+      src: /tmp/index.html
+      dest: /var/www/html
+    notify:
+      - restart_web
+
+  - name: open firewall
+    firewalld:
+      service: http
+      state: enabled
+      immediate: true
+      permanent: true
+
+  handlers:
+  - name: restart_web
+    service:
+      name: httpd
+      state: restarted
