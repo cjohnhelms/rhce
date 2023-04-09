@@ -42,7 +42,7 @@
         target: '/var/ftp/pub(/.*)?'
         setype: public_content_rw_t
         state: present
-      notify: restoreco
+      notify: restorecon
   handlers:
     - name: restorecon
       command: restorecon -Rv /var
