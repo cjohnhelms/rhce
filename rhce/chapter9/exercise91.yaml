@@ -2,4 +2,4 @@
 - name: sample motd role
   hosts: all
   roles:
-    - role: ../roles/motd
+    - role: roles/motd
