@@ -1,0 +1,8 @@
+---
+- name: generate /etc/hosts file
+  hosts: all 
+  tasks:
+  - name: file
+    template:
+      src: ../jinja/exercise83.j2
+      dest: /tmp/hosts

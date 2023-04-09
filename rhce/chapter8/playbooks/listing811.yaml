@@ -1,0 +1,25 @@
+---
+- name: show selinux
+  hosts: all
+  tasks:
+  
+  - name: install required packages
+    yum:
+      name: policycoreutils-python-utils
+      state: present
+
+  - name: create testfile
+    file:
+      name: /tmp/selinux
+      state: touch
+
+  - name: set selinux context
+    sefcontext:
+      target: /tmp/selinux
+      setype: httpd_sys_content_t
+      state: present
+    notify: restorecon
+
+  handlers:
+  - name: restorecon
+    command: restorecon -v /tmp/selinux

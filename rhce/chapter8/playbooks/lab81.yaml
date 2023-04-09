@@ -1,0 +1,12 @@
+---
+- name: make /etc/hosts on all hosts
+  hosts: all
+  tasks:
+    - name: create dir
+      file:
+        path: /tmp/lab81
+        state: directory
+    - name: copy template
+      template:
+        src: ../jinja/lab81.j2
+        dest: /tmp/lab81/hosts

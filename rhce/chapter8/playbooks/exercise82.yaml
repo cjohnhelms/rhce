@@ -1,0 +1,53 @@
+---
+- name: managing web server selinux properties
+  hosts: ansible1
+  tasks:
+  - name: ensure selinux is enabled and enforcing
+    selinux:
+      policy: targeted
+      state: enforcing
+  - name: install the webserver
+    yum:
+      name: httpd
+      state: latest
+  - name: start and enable the webserver
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+  - name: open the firewall service
+    firewalld:
+      service: http
+      state: enabled
+      immediate: true
+      permanent: true
+  - name: create the /web directory
+    file:
+      path: /web
+      state: directory
+  - name: create the index.html file in /web
+    copy:
+      content: "welcome to the exercise82 web server"
+      dest: /web/index.html
+  - name: use lineinfile to change the webserver configuration
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^DocumentRoot "/var/www/html"'
+      line: DocumentRoot "/web"
+  - name: use lininfile to change webserver configuration
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^<Directory "/var/www">'
+      line: '<Directory "/web">'
+  - name: use sefcontext to set context on the new document root
+    sefcontext:
+      target: /web(/.*)?
+      setype: httpd_sys_content_t
+      state: present
+  - name: run the restorecon command
+    command: restorecon -Rv /web
+  - name: allow the web server to run user content
+    seboolean:
+      name: httpd_read_user_content
+      state: yes
+      persistent: yes
