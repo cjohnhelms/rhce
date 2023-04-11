@@ -1,0 +1,13 @@
+---
+- name: install and start nginx
+  hosts: ansible1
+  pre_tasks:
+    - name: ensure httpd not installed
+      yum:
+        name: httpd
+        state: absent
+    - name: daemon-reload
+      systemd:
+        daemon-reload: true
+  roles:
+    - name: nginxinc.nginx

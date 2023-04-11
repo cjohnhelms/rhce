@@ -1,0 +1,23 @@
+---
+- name: selinux system roles practice
+  hosts: ansible1
+  vars:
+    selinux_booleans:
+      - { name: 'cron_can_relabel', state: 'on' }
+    selinux_fcontexts:
+      - { target: '/var/ftp/uploads(./*)?', setype: 'public_content_rw_t', ftype: 'd' }
+    selinux_ports:
+      - { ports: '82', proto: 'tcp', setype: 'http_port_t', state: 'present', local: true }
+    selinux_policy: targeted
+    selinux_state: enforcing
+  pre_tasks:
+    - name: make dir
+      file:
+        path: /var/ftp/uploads
+        state: directory
+    - name: set permission
+      file:
+        path: /var/ftp/uploads
+        mode: 777
+  roles:
+    - linux-system-roles.selinux
