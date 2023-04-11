@@ -1,0 +1,23 @@
+---
+# tasks file for httpd
+- name: install httpd
+  yum:
+    name: httpd
+    state: latest
+- name: start and enable httpd
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+- name: open firewall
+  firewalld:
+    service: http
+    state: enabled
+    immediate: true
+    permanent: true
+- name: copy index.html
+  copy:
+    src: files/index.html
+    dest: /var/www/html/index.html
+  notify:
+    - restart service

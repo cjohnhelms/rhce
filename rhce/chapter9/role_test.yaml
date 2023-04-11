@@ -1,0 +1,5 @@
+---
+- name: test my custom role
+  hosts: ansible2
+  roles:
+    - httpd
