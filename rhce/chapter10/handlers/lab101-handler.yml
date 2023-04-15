@@ -1,0 +1,2 @@
+- name: run restorecon
+  command: restorecon -Rv /var/ftp/pup

@@ -1,0 +1,7 @@
+package: vsftpd
+service: vsftpd
+firewall_service: ftp
+anonymous_enable: yes
+local_enable: yes
+write_enable: yes
+anon_upload_enable: yes

@@ -1,0 +1,20 @@
+- name: install tools
+  yum:
+    name: policycoreutils-python-utils
+    state: present
+- name: set permissions
+  file:
+    path: /var/ftp/pub
+    mode: '0777'
+- name: set boolean
+  seboolean:
+    name: ftpd_anon_write
+    state: yes
+    persistent: yes
+- name: selinux context
+  sefcontext:
+    target: '/var/ftp/pub(\.*)?'
+    setype: public_content_rw_t
+    state: present
+  notify:
+    - run restorecon

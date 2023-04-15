@@ -1,0 +1,4 @@
+- name: template
+  template:
+    src: ../jinja/lab101.j2
+    dest: /etc/vsftpd/vsftpd.conf

@@ -1,0 +1,12 @@
+- name: lab
+  hosts: ansible1
+  vars_files: vars/lab101-vars.yml
+  tasks:
+    - name: install
+      include_tasks: tasks/lab101-install.yml
+    - name: configure
+      include_tasks: tasks/lab101-configure.yml
+    - name: selinux
+      include_tasks: tasks/lab101-selinux.yml
+  handlers:
+    - import_tasks: handlers/lab101-handler.yml

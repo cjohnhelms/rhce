@@ -1,0 +1,15 @@
+- name: install vsftpd
+  yum:
+    name: "{{ package }}"
+    state: latest
+- name: start service
+  service:
+    name: "{{ service }}"
+    state: started
+    enabled: yes
+- name: open firewall
+  firewalld:
+    service: "{{ firewall_service }}"
+    state: enabled
+    permanent: true
+    immediate: true
