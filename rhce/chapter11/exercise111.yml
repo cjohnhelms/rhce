@@ -1,0 +1,27 @@
+---
+- name: testing troubleshooting, intended to fail
+  hosts: ansible2
+  vars:
+    apache_root: /etc/httpd
+    apache_user: httpd
+    apache_group: httpd
+  tasks:
+    - name: install rpm package
+      yum:
+        name: httpd
+        state: latest
+    - name: copy template file
+      template:
+        src: jinja/exercise111-httpd.j2
+        dest: /etc/httpd/conf/httpd.conf
+    - name: state and enable service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: open port in firewall
+      firewalld:
+        service: http
+        permanent: yes
+        immediate: yes
+        state: enabled
