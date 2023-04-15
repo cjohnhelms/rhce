@@ -1,5 +1,7 @@
 ansible1
 ansible2
+ansible3
+ansible4
 
 [webservers]
 ansible1

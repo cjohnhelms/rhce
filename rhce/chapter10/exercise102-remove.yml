@@ -1,0 +1,25 @@
+---
+- name: remove all web services
+  hosts: all
+  tasks:
+    - name: remove httpd
+      yum:
+        name: httpd
+        state: absent
+      notify: 
+        - kill httpd
+        - daemon-reload
+    - name: remove nginx
+      yum:
+        name: nginx
+        state: absent
+      notify:
+        - kill nginx
+        - daemon-reload
+  handlers:
+    - name: kill nginx
+      command: sudo pkill -f nginx
+    - name: kill httpd
+      command: sudo pkill -f httpd
+    - name: daemon-reload
+      command: sudo systemctl daemon-reload
