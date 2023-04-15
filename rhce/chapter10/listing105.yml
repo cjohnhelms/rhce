@@ -1,0 +1,10 @@
+---
+- name: run a task
+  hosts: all
+  tasks:
+    - name: task1
+      debug:
+        msg: running task1
+
+- name: importing a playbook
+  import_playbook: listing104.yml
