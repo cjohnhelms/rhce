@@ -1,0 +1,18 @@
+---
+- name: using assert to check if volume group vgdata exists
+  hosts: all
+  tasks:
+    - name: check for vgdata
+      command: vgs vgdata
+      register: vg_result
+      ignore_errors: true
+    - name: show vg_result variable
+      debug:
+        var: vg_result
+      tags: [ never, debug ]
+    - name: print a message
+      assert:
+        that:
+          - vg_result.rc == 0
+        fail_msg: volume group not found
+        success_msg: volume group was found

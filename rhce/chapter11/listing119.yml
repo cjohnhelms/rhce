@@ -1,0 +1,21 @@
+---
+- name: create a file
+  hosts: all
+  tasks:
+    - name: file
+      file:
+        path: /tmp/statfile
+        state: touch
+        owner: ansible
+
+- name: check file status
+  hosts: all
+  tasks:
+    - name: stat
+      stat:
+        path: /tmp/statfile
+      register: stat_out
+    - name: check
+      fail:
+        msg: "/tmp/statfile owner not expected!"
+      when: stat_out.stat.pw_name != 'root'

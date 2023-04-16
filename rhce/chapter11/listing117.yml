@@ -1,0 +1,14 @@
+---
+- name: test webserver access
+  hosts: localhost
+  become: no
+  tasks:
+    - name: connect to web server
+      uri:
+        url: http://ansible2.attlocal.net
+        return_content: yes
+      register: this
+      failed_when: "'role' not in this.content"
+    - name: debug
+      debug:
+        var: this.content
