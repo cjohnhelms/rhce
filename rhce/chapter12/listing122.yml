@@ -2,7 +2,7 @@
 - name: updating all packages
   hosts: all
   tasks:
-  - name: system update
-    yum:
-      name: '*'
-      state: latest
+    - name: system update
+      yum:
+        name: '*'
+        state: latest
