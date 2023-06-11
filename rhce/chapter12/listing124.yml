@@ -1,0 +1,8 @@
+---
+- name: installing an appstream module
+  hosts: all
+  tasks:
+    - name: install or update an appstream module
+      yum:
+        name: '@php:7.3/devel'
+        state: present
