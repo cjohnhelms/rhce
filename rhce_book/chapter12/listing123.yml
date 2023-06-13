@@ -1,0 +1,8 @@
+---
+- name: install or update package group
+  hosts: all
+  tasks:
+    - name: install or update package group
+      yum:
+        name: '@Virtualization Host'
+        state: latest
