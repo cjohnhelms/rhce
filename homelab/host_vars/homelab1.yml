@@ -1,8 +1,0 @@
-control_packages:
-  - vim
-  - podman
-  - python
-  - java
-control_services:
-  - firewalld
-  - NetworkManager
