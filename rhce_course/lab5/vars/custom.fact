@@ -1,5 +1,0 @@
-[packages]
-samba_package = samba
-
-[services]
-samba_service = smb
