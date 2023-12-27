@@ -1,0 +1,33 @@
+Q: Which of the following are disadvantages of using shell scripts for automation?
+A: They don't work on any target managed operating system.
+A: It is difficult to guarantee that they will always produce the same result if the configuration changes.
+
+Q: In DevOps, the application lifecycle is managed by focusing on different key aspects. Which of the following key aspects comes after releasing?
+A: Configuring
+
+Q: Which of the following are advantages of using a CVS to manage the machine-readable configuration files that are used in infrastructure as code?
+A: It is easy to reproduce.
+A: It makes upgrades easy.
+A: It makes rollbacks easy.
+
+Q: Ansible is an automation tool. Other automation solutions exist as well. Which of the following is not one of them?
+A: Satelitte
+
+Q: When you compare Ansible to competing solutions such as Puppet, SaltStack, and Chef, Ansible offers to significant benefits. Which are these?
+A: Agentless Operation
+A: Easy configuration
+
+Q: Ansible provides different solutions to access remote hosts. Which of the following is not one of them?
+A: Agent
+
+Q: What is the name of the free open-source project that enables you to manage Ansible from a web interface?
+A: AWX
+
+Q: Which of the following is the best description of the declarative approach?
+A: The declarative approach enables you to focus on the changes that are required to reach the desired state.
+
+Q: Ansible can be used for provisioning. Which of the following is not a common provisioning scenario that Ansible is used for?
+A: PXE-booting bare-metal servers
+
+Q: Ansible can be used for different purposes. Which of the following can be considered the core function of Ansible?
+A: Configuration management
