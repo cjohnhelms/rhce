@@ -1,0 +1,32 @@
+Q: Which of the following are required on Ansible managed nodes?
+A: Python
+A: Root access
+A: SSH access
+
+Q: Which statements about Python is an Ansible environment are true?
+A: Python needs to be installed on the managed nodes.
+A: Python 3 is the default version on RHEL 8.
+
+Q: While you are setting up an Ansible managed environment, there are a few requirements. Which of the following is not a mandatory requirement?
+A: Configure SSH key login.
+
+Q: Which statement about sudo is not true?
+A: On managed nodes, Ansible must be able to escalate permissions without a password.
+
+Q: To set up Asnbile to learn for EX294, there are different requirements. Which of the following is not one of them?
+A: 20 GB or more of disk space.
+
+Q: Ansible can be installed in different ways. Which of the following is not one of them?
+A: Use the Java installer.
+
+Q: Executing tasks as a remote user can be secured in different ways. Which of the following is not one of them?
+A: Disallow root execution through sudo.
+
+Q: Which of the following is not a required setup task while installing Ansible on CentOS 8?
+A: Install Python 3.
+
+Q: Which firewall ports need to be open on Ansible-managed hosts?
+A: 22
+
+Q: After you use ssh-keygen to create the SSH key pair, what is the next step?
+A: use ssh-copy-id to copy the public key to the managed machines.
