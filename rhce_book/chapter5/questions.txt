@@ -1,0 +1,30 @@
+Q: Which of the following do you normally find on the first line of a playbook?
+A: ---
+
+Q: Each play should have at least three parameters in its header. What are they?
+A: name, hosts, tasks
+
+Q: Which statements about indentation are true?
+A: Indentation is used to identify the relationship betwen parent and child objects.
+A: Tabs may not be used.
+
+Q: How do you undo modifications that are applied from a playbook?
+A: You can create a playbook to accomplishes the opposite of the original playbook.
+
+Q: What status would you expect the ansible-playbook command to generate while running a task that has modified the managed system?
+A: changed
+
+Q: Which statement about using YAML lists in playbooks is true?
+A: The service module does not support YAML lists to manage multiple servers.
+
+Q: Which option can you use to dees multiple lines of text to a text file, while keeping the newline characters to guarantee proper formatting?
+A: |
+
+Q: Which of the following can you use to verify which tasks in a playbook would trigger a change?
+A: -C
+
+Q: Which of the following indicates the best use case for a multiplay playbook?
+A: If there is a clear relation between the different plays, otherwise use multiple playbooks.
+
+Q: Which of the following is not a benefit of using a multiplay playbook?
+A: Plays can be scheduled separately. 
