@@ -1,0 +1,29 @@
+Q: Which of the following is not a valid method of using inventory?
+A: If nothing is specified, Ansible looks for a file with the name inventory in the current directory.
+
+Q: Which of the following symptoms do you see if no inventory file was specified?
+A: Ansible tries to run commands against localhost.
+
+Q: What is the name of the default Ansible inventory?
+A: /etc/ansible/hosts
+
+Q: Which of the following is not a requirement that must be met by a dynamic intenvtory script?
+A: It must be written in Python.
+
+Q: Which statement about using multiple inventory files is true?
+A: When the name of a directory is specified as the inventory that has to be used, all files in that directory are used as inventory.
+
+Q: Which of the following should not be used in inventory files?
+A: Variables that apply to specific hosts
+
+Q: Which of the following should be avoided?
+A: Define privilege-escalation in the inventory file.
+
+Q: Where should the inventory file be placed in a big corporation where Ansible is used to manage hundreds of servers and appliances?
+A: In the project directory
+
+Q: Which statement about the remote_user setting is not true?
+A: The remote_user setting regers to the user account that is used to run all tasks on managed hosts after privilege escalation.
+
+Q: Which parameter can be used to disable the requirement to check validity of SSH host keys?
+A: host_key_checking
