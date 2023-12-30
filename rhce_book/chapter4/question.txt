@@ -1,0 +1,29 @@
+Q: Using ad hoc commands is useful in multiple situations. Which of the following is not one of them?
+A: Making it easy to repeat tasks in a consistent way. 
+
+Q: What is wrong in the following sample ad hoc command? "ansible all -a "rpm -qa | grep http"
+A: There is no option -m to specify which module should be used.
+
+Q: A user runs the ad hoc command "ansible all -m user -a "name=lisa" on a host where user lisa already exists. What happens?
+A: The command shows the SUCCESS result and nothing is changed.
+
+Q: Which of the following modules must be used if you want to run a shell command that redirects the output of the command to the file output.txt?
+A: shell
+
+Q: You want to run a command on an Ansible-managed Cisco router. Which module should you use?
+A: raw
+
+Q: You want to install software in a network that has multiple linux distributions. Which module would you use to do this on the Ubuntu nodes?
+A: apt
+
+Q: Which of the following is the most accurate statement about the ping module?
+A: It tests whether the host is in a manageable state.
+
+Q: Which command should you use to get a list of all modules installed on your control node?
+A: ansible-doc -l
+
+Q: Which command shows you just a list of argumnets that can be used with a module in a format that is ready to be used in a playbook?
+A: ansible-doc -s
+
+Q: What is the best approach to get a list of modules that can be used for system management?
+A: Look up the module index in  docs.ansible.com and navigate to the system modules section.
