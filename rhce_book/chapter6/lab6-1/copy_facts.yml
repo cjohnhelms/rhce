@@ -1,0 +1,14 @@
+---
+- name: Copy fact files
+  hosts: all
+  vars_files: vars/common
+  tasks:
+    - name: Ensure Ansible dir
+      file:
+        path: /etc/ansible/facts.d
+        state: directory
+        recurse: true
+    - copy:
+        src: files/{{ item }}
+        dest: /etc/ansible/facts.d
+      loop: "{{ fact_file }}"
