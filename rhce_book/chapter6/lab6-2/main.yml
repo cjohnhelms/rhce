@@ -1,0 +1,51 @@
+---
+- name: Lab 6-2
+  hosts: all
+  vars_files: vars/allvars.yml
+  tasks:
+    - name: Install packages
+      yum:
+        name: "{{ item }}"
+        state: installed
+      loop:
+        - "{{ ansible_facts['ansible_local']['packages']['packages']['smb_package'] }}"
+        - "{{ ansible_facts['ansible_local']['packages']['packages']['ftp_package'] }}"
+        - "{{ ansible_facts['ansible_local']['packages']['packages']['db_package'] }}"
+        - "{{ ansible_facts['ansible_local']['packages']['packages']['web_package'] }}"
+        - "{{ ansible_facts['ansible_local']['packages']['packages']['firewall_package'] }}"
+    - name: Run services
+      service:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      loop:
+        - "{{ ansible_facts['ansible_local']['services']['services']['ftp_service'] }}"
+        - "{{ ansible_facts['ansible_local']['services']['services']['web_service'] }}"
+        - "{{ ansible_facts['ansible_local']['services']['services']['firewall_service'] }}"
+    - name: Open firewall
+      firewalld:
+        service: "{{ item }}"
+        state: enabled
+        permanent: true
+        immediate: true
+      loop:
+        - ftp
+        - http
+    - name: Create web root
+      file:
+        path: "{{ web_root }}"
+        state: directory
+        recurse: true
+    - name: Copy in index.html
+      copy:
+        src: files/index.html
+        dest: "{{ web_root }}"
+    - name: Test connection
+      uri:
+        status_code: 200
+        return_content: true
+        url: http://ansible1:80
+      register: url_status
+    - name: Debug result
+      debug:
+        var: "{{ url_status }}"
